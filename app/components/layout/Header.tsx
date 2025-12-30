@@ -1,17 +1,15 @@
 'use client'
 
-import Link from 'next/link'
 import { ReactNode } from 'react'
-import { Aperture } from '@deemlol/next-icons'
 
 type HeaderProps = {
-  title?: string
+  leftSlot?: ReactNode
   centerSlot?: ReactNode
   rightSlot?: ReactNode
 }
 
 export default function Header({
-  title = 'NEXT-SSE',
+  leftSlot,
   centerSlot,
   rightSlot,
 }: HeaderProps) {
@@ -28,13 +26,7 @@ export default function Header({
       <div className="mx-auto flex h-full max-w-screen-xl items-center justify-between px-4">
         {/* LEFT */}
         <div className="flex items-center gap-3">
-          <Aperture size={22} color="black" />
-          <Link
-            href="/"
-            className="text-sm font-semibold tracking-tight text-neutral-900 hover:opacity-80"
-          >
-            {title}
-          </Link>
+          {leftSlot}
         </div>
 
         {/* CENTER */}

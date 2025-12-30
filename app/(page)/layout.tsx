@@ -16,7 +16,7 @@ export default function WithHeaderLayout({
   return (
     <>
       <Header
-        centerSlot={
+        leftSlot={
           <nav className="flex items-center gap-6">
             {guideMenu.map(menu => (
               <Link

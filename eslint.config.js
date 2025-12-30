@@ -49,12 +49,11 @@ export default [
 
     rules: {
       // ✅ Next 핵심 룰
-      'next/no-img-element': 'error',
+      'next/no-img-element': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
       // ✅ React Hooks
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'off',
-
       '@stylistic/semi': ['error', 'never'],
       '@stylistic/quotes': ['error', 'single'],
       '@stylistic/indent': ['error', 2],
