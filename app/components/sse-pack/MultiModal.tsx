@@ -23,24 +23,24 @@ type MultiModalProps = {
   accept?: string
   multiple?: boolean
   onFilesChange?: (files: File[]) => void
-
   files?: File[]
   onRemoveFile?: (index: number) => void
   onClearFiles?: () => void
+  onSend?: (payload: { text: string; files: File[] }) => void
 }
 
-export default function MultiModal({
+const  MultiModal = ({
   placeholder = '무엇이든 물어보세요',
   useAudio = false,
   useClear = false,
   accept = '*/*',
   multiple = true,
   onFilesChange,
-
   files = [],
   onRemoveFile,
   onClearFiles,
-}: MultiModalProps) {
+  onSend,
+}: MultiModalProps) => {
   const BASE_H = 36
   const MIN_H = 36
   const MAX_H = 160
@@ -87,11 +87,18 @@ export default function MultiModal({
   const canSend = value.trim().length > 0 || files.length > 0
   const expanded = taHeight > 44 || value.includes('\n') || files.length > 0
 
-  const onSend = () => {
+  const handleSend = () => {
     if (!canSend) return
+
+    const text = value.trim()
+    const payload = { text, files: [...files] }
+
+    onSend?.(payload)
+
     setValue('')
     onClearFiles?.()
   }
+
 
   const openFilePicker = (nextAccept?: string) => {
     const input = fileInputRef.current
@@ -150,8 +157,6 @@ export default function MultiModal({
         multiple={multiple}
         onChange={handleFiles}
       />
-
-      {/* ✅ OUTER BOX (input + attachments) */}
       <div
         className={[
           'w-full border rounded-[28px]',
@@ -161,7 +166,6 @@ export default function MultiModal({
           'shadow-[0_18px_40px_-22px_rgba(0,0,0,0.28)]',
         ].join(' ')}
       >
-        {/* ✅ Attachments strip (기본 숨김 → 파일 있으면 펼침) */}
         <div
           className={[
             'overflow-hidden transition-all duration-200 ease-out',
@@ -169,7 +173,6 @@ export default function MultiModal({
           ].join(' ')}
         >
           <div className="px-3 pt-3">
-            {/* ChatGPT 느낌: 한 줄 가로 스크롤 */}
             <div className="flex gap-2 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {previews.map((p, idx) => {
                 const ext = p.file.name.split('.').pop()?.toUpperCase() ?? 'FILE'
@@ -292,7 +295,7 @@ export default function MultiModal({
               onKeyDown={e => {
                 if (e.key === 'Enter' && !e.shiftKey) {
                   e.preventDefault()
-                  onSend()
+                  handleSend()
                 }
               }}
               onPaste={e => {
@@ -314,7 +317,6 @@ export default function MultiModal({
             />
           </div>
 
-          {/* Clear */}
           {useClear && (value.length > 0 || files.length > 0) && (
             <button
               type="button"
@@ -350,7 +352,7 @@ export default function MultiModal({
           <button
             type="button"
             aria-label="Send"
-            onClick={onSend}
+            onClick={handleSend}
             disabled={!canSend}
             className={[
               'inline-flex h-9 w-9 items-center justify-center rounded-full transition-all',
@@ -364,3 +366,5 @@ export default function MultiModal({
     </div>
   )
 }
+
+export default MultiModal

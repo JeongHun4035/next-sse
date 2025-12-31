@@ -15,10 +15,12 @@ export default function MultiModalPage() {
           useClear
           files={files}
           onFilesChange={picked => setFiles(prev => [...prev, ...picked])}
-          onRemoveFile={index =>
-            setFiles(prev => prev.filter((_, i) => i !== index))
-          }
+          onRemoveFile={index => setFiles(prev => prev.filter((_, i) => i !== index))}
           onClearFiles={() => setFiles([])}
+          onSend={({ text, files }) => {
+            console.log('text:', text)
+            console.log('files:', files)
+          }}
         />
       </main>
     </div>
