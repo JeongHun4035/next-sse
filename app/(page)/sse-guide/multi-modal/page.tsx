@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 import MultiModal from '@/app/components/sse-pack/MultiModal'
 
-export default function MultiModalPage() {
+const MultiModalPage  = () => {
   const [files, setFiles] = useState<File[]>([])
 
   return (
@@ -26,3 +26,4 @@ export default function MultiModalPage() {
     </div>
   )
 }
+export default MultiModalPage

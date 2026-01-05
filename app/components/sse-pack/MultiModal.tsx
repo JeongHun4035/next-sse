@@ -32,7 +32,6 @@ type MultiModalProps = {
 const  MultiModal = ({
   placeholder = '무엇이든 물어보세요',
   useAudio = false,
-  useClear = false,
   accept = '*/*',
   multiple = true,
   onFilesChange,
@@ -317,23 +316,6 @@ const  MultiModal = ({
             />
           </div>
 
-          {useClear && (value.length > 0 || files.length > 0) && (
-            <button
-              type="button"
-              aria-label="Clear"
-              onClick={() => {
-                setValue('')
-                onClearFiles?.()
-              }}
-              className="
-                inline-flex h-9 w-9 items-center justify-center rounded-full
-                text-neutral-400 transition-colors
-                hover:bg-blue-50 hover:text-blue-700
-              "
-            >
-              <XCircle size={18} />
-            </button>
-          )}
 
           {useAudio && (
             <button
