@@ -2,12 +2,12 @@
 
 import { useMemo, useState } from 'react'
 
-import MultiModal from '@/app/components/sse-pack/MultiModal'
-import { useSSE } from '@/app/hooks/useSse'
+import MultiModal from '@/src/_features/common/MultiModal'
+import { useSSE } from '@/src/_hooks/useSse'
 
 type Mode = 'GET' | 'POST'
 
-const SSEHookPage = () => {
+const SSEHookClient = () => {
   const { sse } = useSSE()
 
   const [files, setFiles] = useState<File[]>([])
@@ -21,7 +21,6 @@ const SSEHookPage = () => {
 
   return (
     <div className="p-6 space-y-4">
-      {/* 토글 */}
       <header className="flex items-center gap-3">
         <div className="flex items-center rounded border overflow-hidden">
           <button
@@ -53,7 +52,6 @@ const SSEHookPage = () => {
           onSend={async ({ text, files }) => {
             const trimmed = (text ?? '').trim()
             if (!trimmed && (!files || files.length === 0)) return
-
             if (mockStarted[mode]) return
 
             if (mode === 'GET') {
@@ -78,4 +76,4 @@ const SSEHookPage = () => {
   )
 }
 
-export default SSEHookPage
+export default SSEHookClient

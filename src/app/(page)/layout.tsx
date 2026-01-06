@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import Header from '@/app/components/layout/Header'
+import Header from '@/src/_features/layout/Header'
 
 export default function WithHeaderLayout({
   children,

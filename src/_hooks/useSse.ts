@@ -2,7 +2,7 @@
 
 import { useCallback } from 'react'
 
-import { fetchRequest } from '@/api/fetchClient'
+import { fetchRequest } from '@/src/_api/fetchClient'
 
 type SseTriggerMethod = 'GET' | 'POST'
 

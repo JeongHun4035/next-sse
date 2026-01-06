@@ -2,9 +2,9 @@
 
 import { useState } from 'react'
 
-import MultiModal from '@/app/components/sse-pack/MultiModal'
+import MultiModal from '@/src/_features/common/MultiModal'
 
-const MultiModalPage  = () => {
+const MultiModalClient = () => {
   const [files, setFiles] = useState<File[]>([])
 
   return (
@@ -15,7 +15,9 @@ const MultiModalPage  = () => {
           useClear
           files={files}
           onFilesChange={picked => setFiles(prev => [...prev, ...picked])}
-          onRemoveFile={index => setFiles(prev => prev.filter((_, i) => i !== index))}
+          onRemoveFile={index =>
+            setFiles(prev => prev.filter((_, i) => i !== index))
+          }
           onClearFiles={() => setFiles([])}
           onSend={({ text, files }) => {
             console.log('text:', text)
@@ -26,4 +28,5 @@ const MultiModalPage  = () => {
     </div>
   )
 }
-export default MultiModalPage
+
+export default MultiModalClient
